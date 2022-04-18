@@ -1,0 +1,7 @@
+.Section .Content .Card {
+    cursor: pointer;
+}
+
+.Section .Content .Selected {
+    color: red;
+}

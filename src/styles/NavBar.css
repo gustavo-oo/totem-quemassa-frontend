@@ -1,0 +1,15 @@
+.Navbar{
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+
+}
+
+.Navbar h2{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.Navbar h2:hover{
+    color: blue;
+}

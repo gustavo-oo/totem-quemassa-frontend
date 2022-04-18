@@ -1,0 +1,12 @@
+.sectionTitle{
+    background-color: rgb(242, 242, 169);
+    margin-bottom: 10px;
+}
+
+.sectionTitle h2{
+    color: black;
+}
+
+.sectionTitle span{
+    color: blue;
+}
