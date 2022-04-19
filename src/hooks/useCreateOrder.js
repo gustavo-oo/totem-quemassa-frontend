@@ -20,6 +20,14 @@ export default function useCreateOrder(){
     const [meal, setMeal] = useState(mealStructure)
     const [drinksQuantity, setDrinksQuantity] = useState([])
 
+    function isOrderEmpty(){
+        if(order.meals === [] && order.drinkOrders === []){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function setDrink(id, quantity){
         let newDrinks = [...drinksQuantity]
         newDrinks[id-1] = quantity
@@ -74,14 +82,14 @@ export default function useCreateOrder(){
     }
 
     function setIngredient(id){
-        const ingredientsId = meal.ingredientsId
+        const ingredientsId = [...meal.ingredientsId]
 
         const index = ingredientsId.indexOf(id)
 
         if(index === -1){
-        ingredientsId.push(id);
+            ingredientsId.push(id); 
         }else{
-        ingredientsId.splice(index, 1)
+            ingredientsId.splice(index, 1)
         }
 
         const sortedIgredientsId = ingredientsId.sort()
@@ -93,6 +101,11 @@ export default function useCreateOrder(){
 
     function addMeal(){
         let orderMeals = [...order.meals]
+
+        if(meal.pastaId === null){
+            return false;
+        }
+
         orderMeals.push(meal)
 
         const newOrder = {...order, "meals": orderMeals}
@@ -115,9 +128,11 @@ export default function useCreateOrder(){
         const newOrder = {...order, "clientName": name, "drinkOrders": drinkOrders}
 
         api.post(newOrderUrl, newOrder).then((response) => {
+        console.log(response.headers)
         const orderId = response.headers.orderid
+        const totalPrice = response.headers.totalprice
             if(orderId){
-                alert("A sua senha é: " + orderId)
+                alert("A sua senha é: " + orderId + "\n" + "Total Value: $" + totalPrice)
             }
         })
 

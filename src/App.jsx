@@ -1,54 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-import Section from './components/Section';
-import Button from './components/Button';
-import DrinkSection from './components/DrinkSection';
-import useCreateOrder from './hooks/useCreateOrder';
-import NavBar from './components/NavBar';
-import OrderResume from './components/OrderResume';
+import Page from './components/Page';
+import NewOrder from './views/NewOrder';
+import ActiveOrders from './views/ActiveOrders'
+import OrderHistory from './views/OrderHistory'
 
 export default function App(props){
-  const[
-    name, 
-    setName,
-    setPasta,
-    setIngredient,
-    setSauce,
-    setTopping,
-    addMeal,
-    setDrink,
-    drinksQuantity,
-    order,
-    endOrder
-  ] = useCreateOrder()
+  const [activePage, setActivePage] = useState('newOrder')
 
-  return(
-    <div>
-      <NavBar/>
+  if(activePage === 'newOrder'){
+    return(
+      <Page setActivePage={setActivePage}>
+        <NewOrder/>
+      </Page>
+    )
+  }else if(activePage === 'orderHistory'){
+    return(
+      <Page setActivePage={setActivePage}>
+        <OrderHistory/>
+      </Page>
+    )
 
-      <Section title="Pastas" onClick={setPasta}/>
-      <Section title="Ingredients" onClick={setIngredient}/>
-      <Section title="Sauces" onClick={setSauce}/>
-      <Section title="Toppings" onClick={setTopping}/>
-    
-      <Button text="Add Meal" onClick={addMeal}/>
-    
-      <DrinkSection title="Drinks" drinksQuantity={drinksQuantity} setDrink={setDrink}/>
-      
+  }else if(activePage === 'activeOrders'){
+    return(
+    <Page setActivePage={setActivePage}>
+      <ActiveOrders/>
+    </Page>)
 
-      <div>
-        <label>Digite seu Nome:</label>
-      </div>
-      <input 
-      type="text" 
-        value={name} 
-        onChange={(event) => setName(event.target.value)}/>
-
-      <OrderResume order={order}/>
-
-      <Button text="End Order" onClick={endOrder}/>    
-      
-    </div>
-  )
+  }else{
+    return(
+    <Page setActivePage={setActivePage}>
+      <h1>Page Not Found</h1>
+    </Page>)
+  }
+  
 }

@@ -1,0 +1,15 @@
+.OrderResume h3{
+    color:blue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 2.0rem;
+}
+
+.OrderResume h4{
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.OrderResume{
+    margin-bottom: 20px;
+}
